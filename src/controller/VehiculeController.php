@@ -32,16 +32,24 @@ class VehiculeController extends AbstractController {
         }
     }
 
-    public static function edit(int $id) {
-        echo 'formulaire d\'édition id #' . $id;
+    public static function edit(int $idVehicule) {
+        echo 'formulaire d\'édition id #' . $idVehicule;
+        $vehicule = Vehicule::findVehicule($idVehicule);
+        echo self::getTwig()->render('vehicule/edit.html', [
+            'vehicule' => $vehicule,
+        ]);
     }
 
     public static function update() {
-        echo 'Edition';
+        var_dump($_POST);
+        Vehicule::updateVehicule();
+        echo self::index();
     }
 
-    public static function delete($id) {
-        echo 'Suppression id #' . $id;
+    public static function delete($idVehicule) {
+        Vehicule::deleteVehicule($idVehicule);
+        echo self::index();
     }
+
 
 }

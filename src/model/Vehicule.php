@@ -141,7 +141,7 @@ class Vehicule extends AbstractModel {
 
     
     /**
-     * Retourne la liste des conducteurs de la BdD
+     * Retourne la liste des véhicules de la BdD
      * 
      * @return array $dataAsObjects
      */
@@ -163,6 +163,29 @@ class Vehicule extends AbstractModel {
 
         return $dataAsObjects;
     }
+
+    /**
+     * Récupère un véhicule par son id
+     */
+    public static function findVehicule($idVehicule) {
+        $bdd = self::getPdo();
+
+        $query = "SELECT * FROM vehicule WHERE id_vehicule= :id_vehicule";
+        $response = $bdd->prepare($query);
+        $response->execute([
+            'id_vehicule' => $idVehicule,
+        ]);
+
+        $data = $response->fetch();
+
+        // On prépare le tableau qui contiendra nos animaux en format Object
+        $dataAsObject = [];
+
+        $dataAsObject[] = self::toObject($data);
+
+        return $dataAsObject;
+    }
+
 
     /**
      * Transforme un array de données de la table en un objet
@@ -198,6 +221,43 @@ class Vehicule extends AbstractModel {
             'immatriculation' => $_POST['immatriculation']
         ]);
     }
+    
+    /**
+     * Suppression d'un véhicule
+     * 
+     */
+    public static function deleteVehicule($idVehicule) {
+        $bdd = self::getPdo();
+
+        $query =   "DELETE FROM vehicule
+                    WHERE id_vehicule= :id_vehicule";
+        $response = $bdd->prepare($query);
+        $response->execute([
+            'id_vehicule' => $idVehicule,
+        ]);
+    }
+
+    /**
+     * Mise à jour d'un véhicule
+     * 
+     */
+    public static function updateVehicule() {
+        $bdd = self::getPdo();
+
+        $query =   "UPDATE vehicule
+                    SET marque = :marque, modele = :modele, couleur = :couleur, immatriculation = :immatriculation
+                    WHERE id_vehicule= :id_vehicule";
+        $response = $bdd->prepare($query);
+        $response->execute([
+            'id_vehicule' => $_POST['id_vehicule'],
+            'marque'           => $_POST['marque'],
+            'modele'        => $_POST['modele'],
+            'couleur'        => $_POST['couleur'],
+            'immatriculation'        => $_POST['immatriculation']
+        ]);
+    }
+
+
 
 
 }

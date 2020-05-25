@@ -32,7 +32,6 @@ class ConducteurController extends AbstractController {
     }
 
     public static function edit(int $idConducteur) {
-        echo 'formulaire d\'édition id #' . $idConducteur;
         $conducteur = Conducteur::findConducteur($idConducteur);
         echo self::getTwig()->render('conducteur/edit.html', [
             'conducteur' => $conducteur,

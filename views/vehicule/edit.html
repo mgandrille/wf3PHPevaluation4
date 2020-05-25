@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Vous pouvez modifier le véhicule {{ vehicule[0].idVehicule }} :</h1>
+
+    <div class="container-fluid mt-3">
+        <form method="post" action="{{base_path ~ '/vehicule/' ~ vehicule[0].idVehicule ~ '/edit'}}">
+
+            <input type="hidden" name="id_vehicule" class="form-control" id="id_vehicule" value="{{ vehicule[0].idVehicule }}">
+
+            <div class="form-group row">
+                <label for="marque" class="col-sm-3 col-form-label"><strong>Marque : </strong></label>
+                <div class="col-sm-9">
+                    <input type="text" name="marque" class="form-control" id="marque" value="{{ vehicule[0].marque }}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="modele" class="col-sm-3 col-form-label"><strong>Modèle : </strong></label>
+                <div class="col-sm-9">
+                    <input type="text" name="modele" class="form-control" id="modele" value="{{ vehicule[0].modele }}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="couleur" class="col-sm-3 col-form-label"><strong>Couleur : </strong></label>
+                <div class="col-sm-9">
+                    <input type="text" name="couleur" class="form-control" id="couleur" value="{{ vehicule[0].couleur }}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="immatriculation" class="col-sm-3 col-form-label"><strong>Immatriculation : </strong></label>
+                <div class="col-sm-9">
+                    <input type="text" name="immatriculation" class="form-control" id="immatriculation" value="{{ vehicule[0].immatriculation }}">
+                </div>
+            </div>
+
+            <input class="btn btn-warning" type="submit" value="Modifier le véhicule">
+        </form>
+
+    </div>
+
+
+
+{% endblock content %}
