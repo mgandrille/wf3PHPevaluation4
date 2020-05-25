@@ -31,16 +31,23 @@ class ConducteurController extends AbstractController {
         }
     }
 
-    public static function edit(int $id) {
-        echo 'formulaire d\'édition id #' . $id;
+    public static function edit(int $idConducteur) {
+        echo 'formulaire d\'édition id #' . $idConducteur;
+        $conducteur = Conducteur::findConducteur($idConducteur);
+        echo self::getTwig()->render('conducteur/edit.html', [
+            'conducteur' => $conducteur,
+        ]);
     }
 
     public static function update() {
-        echo 'Edition';
+        var_dump($_POST);
+        Conducteur::updateConducteur();
+        echo self::index();
     }
 
-    public static function delete($id) {
-        echo 'Suppression id #' . $id;
+    public static function delete($idConducteur) {
+        Conducteur::deleteConducteur($idConducteur);
+        echo self::index();
     }
 
 }

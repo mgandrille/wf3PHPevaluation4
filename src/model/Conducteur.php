@@ -45,7 +45,7 @@ class Conducteur extends AbstractModel {
      * @param int $idConducteur
      * @return self
      */
-    public function setId(int $idConducteur) : self
+    public function setIdConducteur(int $idConducteur) : self
     {
         $this->idConducteur = $idConducteur;
         return $this;
@@ -118,6 +118,28 @@ class Conducteur extends AbstractModel {
     }
 
     /**
+     * Récupère un conducteur par son id
+     */
+    public static function findConducteur($idConducteur) {
+        $bdd = self::getPdo();
+
+        $query = "SELECT * FROM conducteur WHERE id_conducteur= :id_conducteur";
+        $response = $bdd->prepare($query);
+        $response->execute([
+            'id_conducteur' => $idConducteur,
+        ]);
+
+        $data = $response->fetch();
+
+        // On prépare le tableau qui contiendra nos animaux en format Object
+        $dataAsObject = [];
+
+        $dataAsObject[] = self::toObject($data);
+
+        return $dataAsObject;
+    }
+
+    /**
      * Transforme un array de données de la table en un objet
      * 
      * @return object $conducteur
@@ -125,7 +147,7 @@ class Conducteur extends AbstractModel {
     public static function toObject($array) {
 
         $conducteur = new Conducteur;
-        $conducteur->setId($array['id_conducteur']);
+        $conducteur->setIdConducteur($array['id_conducteur']);
         $conducteur->setPrenom($array['prenom']);
         $conducteur->setNom($array['nom']);
 
@@ -144,9 +166,43 @@ class Conducteur extends AbstractModel {
         $response = $bdd->prepare($query);
         $response->execute([
             'prenom' => $_POST['prenom'],
-            'nom' => $_POST['nom']
+            'nom'    => $_POST['nom']
         ]);
     }
+
+    /**
+     * Suppression d'un conducteur
+     * 
+     */
+    public static function deleteConducteur($idConducteur) {
+        $bdd = self::getPdo();
+
+        $query =   "DELETE FROM conducteur
+                    WHERE id_conducteur= :id_conducteur";
+        $response = $bdd->prepare($query);
+        $response->execute([
+            'id_conducteur' => $idConducteur,
+        ]);
+    }
+
+    /**
+     * Mise à jour d'un conducteur
+     * 
+     */
+    public static function updateConducteur() {
+        $bdd = self::getPdo();
+
+        $query =   "UPDATE conducteur
+                    SET prenom = :prenom, nom = :nom
+                    WHERE id_conducteur= :id_conducteur";
+        $response = $bdd->prepare($query);
+        $response->execute([
+            'id_conducteur' => $_POST['id_conducteur'],
+            'nom'           => $_POST['nom'],
+            'prenom'        => $_POST['prenom']
+        ]);
+    }
+
 
 
 }
