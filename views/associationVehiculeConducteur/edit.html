@@ -1,28 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Vous pouvez modifier le conducteur {{ conducteur[0].idConducteur }} :</h1>
+    <h1>Vous pouvez modifier l'association véhicule / conducteur #{{ association[0].idAssociation }} :</h1>
 
     <div class="container-fluid mt-3">
-        <form method="post" action="{{base_path ~ '/conducteur/' ~ conducteur[0].idConducteur ~ '/edit'}}">
+        <form method="post" action="{{base_path ~ '/conducteur/' ~ association[0].idAssociation ~ '/edit'}}">
 
-            <input type="hidden" name="id_conducteur" class="form-control" id="id_conducteur" value="{{ conducteur[0].idConducteur }}">
+            <input type="hidden" name="id_conducteur" class="form-control" id="id_conducteur" value="{{ association[0].idAssociation }}">
 
             <div class="form-group row">
                 <label for="nom" class="col-sm-2 col-form-label"><strong>Nom : </strong></label>
                 <div class="col-sm-10">
-                    <input type="text" name="nom" class="form-control" id="nom" value="{{ conducteur[0].nom }}">
+                    <input type="text" name="nom" class="form-control" id="nom" value="{{ association[0].idVehicule }}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="prenom" class="col-sm-2 col-form-label"><strong>Prénom : </strong></label>
                 <div class="col-sm-10">
-                    <input type="text" name="prenom" class="form-control" id="prenom" value="{{ conducteur[0].prenom }}">
+                    <input type="text" name="prenom" class="form-control" id="prenom" value="{{ association[0].idConducteur }}">
                 </div>
             </div>
 
-            <input class="btn btn-warning" type="submit" value="Modifier le conducteur">
+            <input class="btn btn-warning" type="submit" value="Modifier l'association">
         </form>
 
     </div>

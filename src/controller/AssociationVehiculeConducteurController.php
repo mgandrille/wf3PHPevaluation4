@@ -6,9 +6,9 @@ use App\Model\AssociationVehiculeConducteur;
 class AssociationVehiculeConducteurController extends AbstractController {
 
     public static function index() {
-        echo 'Voici la liste de tout';
+        // echo 'Voici la liste de tout';
         $associations = AssociationVehiculeConducteur::findAll();
-        var_dump($associations);
+        // var_dump($associations);
         // $conducteur = AssociationVehiculeConducteur::relationAssociationConducteur($associations);
         // $vehicule = AssociationVehiculeConducteur::relationAssociationVehicule($associations);
         echo self::getTwig()->render('associationVehiculeConducteur/index.html', [
