@@ -24,7 +24,7 @@ Les routes seront situées dans `config/routes.php`
 
 ### Models
 
-- Les controllers devront hériter de la classe `AbstractModel` existante
+- Les models devront hériter de la classe `AbstractModel` existante
 - Ils devront faire partie du namespace `App\Model`
 
 

@@ -5,6 +5,8 @@ namespace App\Controller;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
+require __DIR__ . '/../../vendor/autoload.php';
+
 abstract class AbstractController {
 
     public static function getTwig() {
