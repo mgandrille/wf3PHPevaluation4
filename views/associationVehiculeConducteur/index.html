@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Voici la liste de tous les associations entre véhicules et conducteurs :</h1>
+
+    <div class="container">
+        <div class="row">
+
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">id_association</th>
+                        <th scope="col">Conducteur</th>
+                        <th scope="col">Véhicule</th>
+                        <th scope="col">Modification</th>
+                        <th scope="col">Suppression</th>
+                    </tr>
+                </thead>
+
+                {% for association in associations %}
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ association.idAssociation }}</th>
+                        <td>  <br> {{ association.idConducteur }}</td>
+                        <td>{{ association.idVehicule }}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                {% endfor %}    
+
+            </table>
+        </div>    
+    </div>
+
+    <hr>
+
+    <div class="container-fluid mt-3">
+        <form method="post" action="{{base_path ~ '/association_vehicule_conducteur'}}">
+
+            <div class="input-group mb-3">
+                <label class="col-sm-2 col-form-label" for="id_conducteur">Conducteur</label>
+                <select class="custom-select" id="id_conducteur">
+                    <option selected>Choisir le conducteur </option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+                <label class="col-sm-2 col-form-label" for="id_vehicule">Véhicule</label>
+                <select class="custom-select" id="id_vehicule">
+                    <option selected>Choisir le véhicule </option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+
+            <input class="btn btn-warning" type="submit" value="Ajouter cette association">
+        </form>
+
+    </div>
+
+
+
+{% endblock content %}
