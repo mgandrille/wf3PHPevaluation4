@@ -104,7 +104,8 @@ class AssociationVehiculeConducteur extends AbstractModel {
         
         $bdd = self::getPdo();
 
-        $query = "SELECT * FROM association_vehicule_conducteur";
+        $query = "  SELECT * 
+                    FROM association_vehicule_conducteur";
         $response = $bdd->prepare($query);
         $response->execute();
 
@@ -125,7 +126,9 @@ class AssociationVehiculeConducteur extends AbstractModel {
     public static function findAssociation($idAssociation) {
         $bdd = self::getPdo();
 
-        $query = "SELECT * FROM conducteur WHERE id_association= :id_association";
+        $query =   "SELECT * 
+                    FROM association_vehicule_conducteur 
+                    WHERE id_association= :id_association";
         $response = $bdd->prepare($query);
         $response->execute([
             'id_association' => $idAssociation,
@@ -156,37 +159,6 @@ class AssociationVehiculeConducteur extends AbstractModel {
         return $association;
     }
 
-    /**
-     * Permet l'affichage d'un conducteur en fonction de l'id_conducteur
-     * 
-     * @return string $affichageConducteur
-     */
-    // public static function relationAssociationConducteur($idConducteur) {
-    //     $affichageConducteur = "";
-    //     $conducteur = new Conducteur;
-    //     $conducteur->getPrenom($idConducteur);
-    //     $affichageConducteur += $conducteur;
-    //     $conducteur->getNom($idConducteur);
-    //     $affichageConducteur += " " + $conducteur;
-
-    //     return $affichageConducteur;
-    // }
-
-        /**
-     * Permet l'affichage d'un véhicule en fonction de l'id_conducteur
-     * 
-     * @return string $affichageVehicule
-     */
-    // public static function relationAssociationVehicule($idVehicule) {
-    //     $affichageVehicule = "";
-    //     $vehicule = new Vehicule;
-    //     $vehicule->getMarque($idVehicule);
-    //     $affichageVehicule += $vehicule;
-    //     $vehicule->getModele($idVehicule);
-    //     $affichageVehicule += " " + $vehicule;
-
-    //     return $affichageVehicule;
-    // }
 
     /**
      * Création d'une association

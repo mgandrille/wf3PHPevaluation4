@@ -49,7 +49,7 @@ LEFT JOIN conducteur
 
 SELECT * 
 FROM association_vehicule_conducteur
-LEFT JOIN conducteur 
+FULL JOIN conducteur 
 	ON conducteur.id_conducteur = association_vehicule_conducteur.id_conducteur 
-LEFT JOIN vehicule 
+FULL JOIN vehicule 
 	ON vehicule.id_vehicule = association_vehicule_conducteur.id_vehicule;
