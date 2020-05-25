@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Voici la liste de tous les véhicules :</h1>
+
+    <div class="container">
+        <div class="row">
+
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">id_vehicule</th>
+                        <th scope="col">Marque</th>
+                        <th scope="col">Modèle</th>
+                        <th scope="col">Couleur</th>
+                        <th scope="col">Immatriculation</th>
+                        <th scope="col">Modification</th>
+                        <th scope="col">Suppression</th>
+                    </tr>
+                </thead>
+
+                {% for vehicule in vehicules %}
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ vehicule.idVehicule }}</th>
+                        <td>{{ vehicule.marque }}</td>
+                        <td>{{ vehicule.modele }}</td>
+                        <td>{{ vehicule.couleur }}</td>
+                        <td>{{ vehicule.immatriculation }}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                {% endfor %}    
+
+            </table>
+        </div>    
+    </div>
+
+    <hr>
+
+    <div class="container-fluid mt-3">
+        <form method="post" action="{{base_path ~ '/vehicule'}}">
+
+            <div class="form-group row">
+                <label for="marque" class="col-sm-3 col-form-label"><strong>Marque : </strong></label>
+                <div class="col-sm-9">
+                    <input type="text" name="marque" class="form-control" id="marque" placeholder="Marque du véhicule" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="modele" class="col-sm-3 col-form-label"><strong>Modèle : </strong></label>
+                <div class="col-sm-9">
+                    <input type="text" name="modele" class="form-control" id="modele" placeholder="Modèle du véhicule" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="couleur" class="col-sm-3 col-form-label"><strong>Couleur : </strong></label>
+                <div class="col-sm-9">
+                    <input type="text" name="couleur" class="form-control" id="couleur" placeholder="Couleur du véhicule" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="immatriculation" class="col-sm-3 col-form-label"><strong>Immatriculation : </strong></label>
+                <div class="col-sm-9">
+                    <input type="text" name="immatriculation" class="form-control" id="immatriculation" placeholder="Immatriculation du véhicule" required>
+                </div>
+            </div>
+
+
+            <input class="btn btn-warning" type="submit" value="Créer un véhicule">
+        </form>
+
+    </div>
+
+
+
+{% endblock content %}
