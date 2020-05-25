@@ -39,7 +39,7 @@ class ConducteurController extends AbstractController {
     }
 
     public static function update() {
-        var_dump($_POST);
+        // var_dump($_POST);
         Conducteur::updateConducteur();
         echo self::index();
     }

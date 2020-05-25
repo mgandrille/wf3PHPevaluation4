@@ -120,6 +120,28 @@ class AssociationVehiculeConducteur extends AbstractModel {
     }
 
     /**
+     * Récupère une association par son id
+     */
+    public static function findAssociation($idAssociation) {
+        $bdd = self::getPdo();
+
+        $query = "SELECT * FROM conducteur WHERE id_association= :id_association";
+        $response = $bdd->prepare($query);
+        $response->execute([
+            'id_association' => $idAssociation,
+        ]);
+
+        $data = $response->fetch();
+
+        // On prépare le tableau qui contiendra nos animaux en format Object
+        $dataAsObject = [];
+
+        $dataAsObject[] = self::toObject($data);
+
+        return $dataAsObject;
+    }
+
+    /**
      * Transforme un array de données de la table en un objet
      * 
      * @return object $association
@@ -181,6 +203,41 @@ class AssociationVehiculeConducteur extends AbstractModel {
             'id_conducteur' => $_POST['id_conducteur']
         ]);
     }
+
+    
+    /**
+     * Suppression d'un conducteur
+     * 
+     */
+    public static function deleteAssociation($idAssociation) {
+        $bdd = self::getPdo();
+
+        $query =   "DELETE FROM association_vehicule_conducteur
+                    WHERE id_association= :id_association";
+        $response = $bdd->prepare($query);
+        $response->execute([
+            'id_association' => $idAssociation,
+        ]);
+    }
+
+    /**
+     * Mise à jour d'un conducteur
+     * 
+     */
+    public static function updateAssociation() {
+        $bdd = self::getPdo();
+
+        $query =   "UPDATE association_vehicule_conducteur
+                    SET id_vehicule = :id_vehicule, id_conducteur = :id_conducteur
+                    WHERE id_association= :id_association";
+        $response = $bdd->prepare($query);
+        $response->execute([
+            'id_association' => $_POST['id_association'],
+            'id_conducteur'  => $_POST['id_conducteur'],
+            'id_vehicule'    => $_POST['id_vehicule']
+        ]);
+    }
+
 
 
 

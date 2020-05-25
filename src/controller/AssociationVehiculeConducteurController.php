@@ -30,16 +30,22 @@ class AssociationVehiculeConducteurController extends AbstractController {
     public static function new() {
     }
 
-    public static function edit(int $id) {
-        echo 'formulaire d\'édition id #' . $id;
+    public static function edit(int $idAssociation) {
+        $association = AssociationVehiculeConducteur::findAssociation($idAssociation);
+        echo self::getTwig()->render('conducteur/edit.html', [
+            'association' => $association,
+        ]);
     }
 
     public static function update() {
-        echo 'Edition';
+        var_dump($_POST);
+        AssociationVehiculeConducteur::updateAssociation();
+        echo self::index();
     }
 
-    public static function delete($id) {
-        echo 'Suppression id #' . $id;
+    public static function delete($idAssociation) {
+        AssociationVehiculeConducteur::deleteAssociation($idAssociation);
+        echo self::index();
     }
 
 }
